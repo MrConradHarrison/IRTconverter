@@ -1,0 +1,13 @@
+name: IRTconverter
+title: IRTconverter
+username:
+account: conrad-harrison
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6824325
+bundleId: 6252063
+url: https://conrad-harrison.shinyapps.io/IRTconverter/
+when: 1661872274.32314
+lastSyncTime: 1661872274.32315
+asMultiple: FALSE
+asStatic: FALSE
