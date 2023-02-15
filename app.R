@@ -16,9 +16,13 @@ OHS.fscores <- fscores(OHS.grm, method = "EAPsum") %>%
   as.data.frame() %>%
   arrange(F1)
 
-OHS.df <- cbind(seq(0,48,1), OHS.fscores)
-colnames(OHS.df) <- c("Sum score", "Average IRT score")
+OHS.tscores <- round((OHS.fscores*10) + 50,1)
+
+OHS.df <- cbind(seq(0,48,1), OHS.fscores, OHS.tscores)
+colnames(OHS.df) <- c("Sum score", "Average IRT score", "Average T-score")
 OHS.df$'Sum score' <- as.character(OHS.df$'Sum score')
+OHS.df$'Average T-score' <- as.character(OHS.df$'Average T-score')
+
 
 
 OKS.fscores <- fscores(OKS.grm, method = "EAPsum") %>%
@@ -26,10 +30,12 @@ OKS.fscores <- fscores(OKS.grm, method = "EAPsum") %>%
   as.data.frame() %>%
   arrange(F1)
 
-OKS.df <- cbind(seq(0,48,1), OKS.fscores)
-colnames(OKS.df) <- c("Sum score", "Average IRT score")
-OKS.df$'Sum score' <- as.character(OKS.df$'Sum score')
+OKS.tscores <- round((OKS.fscores*10) + 50,1)
 
+OKS.df <- cbind(seq(0,48,1), OKS.fscores, OKS.tscores)
+colnames(OKS.df) <- c("Sum score", "Average IRT score", "Average T-score")
+OKS.df$'Sum score' <- as.character(OKS.df$'Sum score')
+OKS.df$'Average T-score' <- as.character(OKS.df$'Average T-score')
 
 ## UI
 
@@ -106,7 +112,7 @@ ui <- navbarPage("IRT Score Conversion for the Oxford Knee and Hip Scores",
                               downloadButton('OKSdownloadData', 'Download')
                             ),
                             mainPanel(
-                              box(style='width:400px;overflow-x: scroll;height:400px;overflow-y: scroll;',
+                              box(style='width:600px;overflow-x: scroll;height:400px;overflow-y: scroll;',
                                   tableOutput('OKScontents')
                               )
                             )
@@ -205,7 +211,7 @@ ui <- navbarPage("IRT Score Conversion for the Oxford Knee and Hip Scores",
                             h3("The score converter"),
                             br(),
                             column(
-                              3,
+                              4,
                               fileInput('OHSfile', 'Choose CSV File',
                                         accept=c('text/csv', 
                                                  'text/comma-separated-values,text/plain', 
@@ -317,6 +323,7 @@ server <- function(input, output) {
   
   # OKS server functions
   
+  
   getOKSData <- reactive({
     
     inFile <- input$OKSfile
@@ -328,9 +335,17 @@ server <- function(input, output) {
     
     scores <- fscores(OKS.grm, response.pattern = csv)
     
-    colnames(scores) <- c("OKS IRT score", "Standard error of measurement")
+    tscores <- (scores[,1]*10) + 50
     
-    scores
+    scoretable <- cbind(scores, tscores)
+    
+    colnames(scoretable) <- c("OKS IRT score", "Standard error of measurement", "T-score")
+    
+    scoretable[,1] <- round(scoretable[,1],2)
+    scoretable[,2] <- round(scoretable[,2],2)
+    scoretable[,3] <- as.character(round(scoretable[,3],1))
+    
+    scoretable
     
   })
   
@@ -376,9 +391,18 @@ server <- function(input, output) {
     
     scores <- fscores(OHS.grm, response.pattern = csv)
     
-    colnames(scores) <- c("OHS IRT score", "Standard error of measurement")
+    tscores <- (scores[,1]*10) + 50
     
-    scores
+    scoretable <- cbind(scores, tscores)
+    
+    colnames(scoretable) <- c("OHS IRT score", "Standard error of measurement", "T-score")
+    
+    scoretable[,1] <- round(scoretable[,1],2)
+    scoretable[,2] <- round(scoretable[,2],2)
+    scoretable[,3] <- as.character(round(scoretable[,3],1))
+    
+    scoretable
+    
     
   })
   
