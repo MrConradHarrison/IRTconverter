@@ -132,8 +132,9 @@ ui <- navbarPage("IRT Score Conversion for the Oxford Knee and Hip Scores",
                           br(),
                           br(),
                           fluidRow(
-                            div(column(width = 12, p("To reference this app, please cite [PAPER REFERENCE]. The source code for this app can be found at: 
-                                                     https://github.com/MrConradHarrison/IRTconverter")))),
+                            div(column(width = 12, 
+                                       p("To reference this app, please cite ", a(href = "https://www.sciencedirect.com/science/article/pii/S0895435623000938", "the accompanying paper.", .noWS = "outside"), .noWS = c("after-begin", "before-end")), 
+                                       p("The source code for this app can be found ", a(href = "https://github.com/MrConradHarrison/IRTconverter", "here.", .noWS = "outside"), .noWS = c("after-begin", "before-end"))))),
                           br(),
                           
                           fluidRow(
@@ -245,9 +246,10 @@ ui <- navbarPage("IRT Score Conversion for the Oxford Knee and Hip Scores",
                           br(),
                           br(),
                           br(),
-                          fluidRow(
-                            div(column(width = 12, p("To reference this app, please cite [PAPER REFERENCE]. The source code for this app can be found at: 
-                                                     https://github.com/MrConradHarrison/IRTconverter")))),
+  fluidRow(
+    div(column(width = 12, 
+               p("To reference this app, please cite ", a(href = "https://www.sciencedirect.com/science/article/pii/S0895435623000938", "the accompanying paper.", .noWS = "outside"), .noWS = c("after-begin", "before-end")), 
+               p("The source code for this app can be found ", a(href = "https://github.com/MrConradHarrison/IRTconverter", "here.", .noWS = "outside"), .noWS = c("after-begin", "before-end"))))),
                           br(),
                           
                           fluidRow(
@@ -291,8 +293,9 @@ ui <- navbarPage("IRT Score Conversion for the Oxford Knee and Hip Scores",
                                    br(),
                                    br(),
                                    fluidRow(
-                                     div(column(width = 12, p("To reference this app, please cite [PAPER REFERENCE]. The source code for this app can be found at: 
-                                                     https://github.com/MrConradHarrison/IRTconverter")))),
+                                     div(column(width = 12, 
+                                                p("To reference this app, please cite ", a(href = "https://www.sciencedirect.com/science/article/pii/S0895435623000938", "the accompanying paper.", .noWS = "outside"), .noWS = c("after-begin", "before-end")), 
+                                                p("The source code for this app can be found ", a(href = "https://github.com/MrConradHarrison/IRTconverter", "here.", .noWS = "outside"), .noWS = c("after-begin", "before-end"))))),
                                    br(),
                                    
                                    fluidRow(
